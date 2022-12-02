@@ -76,13 +76,6 @@ async function run() {
         //     res.status(403).send({ accessToken: '' })
         // })
 
-        // post booking
-        app.post('/booking', async (req, res) => {
-            const booking = req.body;
-            const result = await bookingCollection.insertOne(booking)
-            res.send(result)
-        })
-
         // get order data form db
         app.get('/orders', async (req, res) => {
             const query = {}
@@ -96,6 +89,22 @@ async function run() {
             const advertiseProducts = await advertiseCollection.find(query).toArray()
             res.send(advertiseProducts)
         })
+
+        // 
+        app.get('/booking', async (req, res) => {
+            const query = {}
+            const bookingProducts = await bookingCollection.find(query).toArray()
+            res.send(bookingProducts)
+        })
+
+        // post booking
+        app.post('/booking', async (req, res) => {
+            const booking = req.body;
+            const result = await bookingCollection.insertOne(booking)
+            res.send(result)
+        })
+
+
     }
 
     finally {
