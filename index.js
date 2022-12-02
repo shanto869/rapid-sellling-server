@@ -21,6 +21,7 @@ async function run() {
         // 
         const productCategoriesCollection = client.db('Rapid-Reselling').collection('all-categories');
         const allProductsCollection = client.db('Rapid-Reselling').collection('all-products');
+        const bookingCollection = client.db('Rapid-Reselling').collection('user-booking');
 
 
 
@@ -39,6 +40,13 @@ async function run() {
             const query = { category_id: id }
             const cursor = allProductsCollection.find(query)
             const result = await cursor.toArray()
+            res.send(result)
+        })
+
+        // post booking
+        app.post('/booking', async (req, res) => {
+            const booking = req.body;
+            const result = await bookingCollection.insertOne(booking)
             res.send(result)
         })
     }
