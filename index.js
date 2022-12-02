@@ -22,6 +22,16 @@ async function run() {
         const productCategoriesCollection = client.db('Rapid-Reselling').collection('all-categories');
         const allProductsCollection = client.db('Rapid-Reselling').collection('all-products');
 
+
+
+        // get all categories from db
+        app.get('/productCategories', async (req, res) => {
+            const query = {}
+            const cursor = productCategoriesCollection.find(query)
+            const result = await cursor.toArray()
+            res.send(result)
+        })
+
         // get review for specific id from db
         app.get('/products/:id', async (req, res) => {
             const id = req.params.id;
@@ -32,6 +42,7 @@ async function run() {
             res.send(result)
         })
     }
+
     finally {
 
     }
