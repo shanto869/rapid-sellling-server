@@ -18,7 +18,19 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 
 async function run() {
     try {
+        // 
+        const productCategoriesCollection = client.db('Rapid-Reselling').collection('all-categories');
+        const allProductsCollection = client.db('Rapid-Reselling').collection('all-products');
 
+        // get review for specific id from db
+        app.get('/products/:id', async (req, res) => {
+            const id = req.params.id;
+            console.log(id)
+            const query = { category_id: id }
+            const cursor = allProductsCollection.find(query)
+            const result = await cursor.toArray()
+            res.send(result)
+        })
     }
     finally {
 
