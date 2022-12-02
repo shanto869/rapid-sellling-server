@@ -97,12 +97,6 @@ async function run() {
             res.send(bookingProducts)
         })
 
-        // post booking
-        app.post('/booking', async (req, res) => {
-            const booking = req.body;
-            const result = await bookingCollection.insertOne(booking)
-            res.send(result)
-        })
 
 
     }
