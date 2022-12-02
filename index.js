@@ -42,6 +42,7 @@ async function run() {
         const productCategoriesCollection = client.db('Rapid-Reselling').collection('all-categories');
         const allProductsCollection = client.db('Rapid-Reselling').collection('all-products');
         const bookingCollection = client.db('Rapid-Reselling').collection('user-booking');
+        const advertiseCollection = client.db('Rapid-Reselling').collection('advertise-products');
 
 
 
@@ -87,6 +88,13 @@ async function run() {
             const query = {}
             const orders = await bookingCollection.find(query).toArray()
             res.send(orders)
+        })
+
+        // get advertise products 
+        app.get('/advertise_products', async (req, res) => {
+            const query = {}
+            const advertiseProducts = await advertiseCollection.find(query).toArray()
+            res.send(advertiseProducts)
         })
     }
 
